@@ -1,2 +1,2 @@
 # ontology-retriever-portal
-The backend angular micro service for ontology retrieval
+The frontend angular micro service for ontology retrieval
