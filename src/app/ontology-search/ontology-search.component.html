@@ -1,0 +1,32 @@
+<section>
+  <form [formGroup]="searchForm">
+      <label>
+         <input type="text" (keyup)="searchTerm.next($event)" formControlName="search" placeholder="Retrieve ontologies..." />
+
+         <div *ngIf="loading">
+              <p class="search-message">Searching</p>
+              <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+         </div>
+      </label>
+  </form>
+
+  <div *ngIf="searchResult">
+    <div class="results" >
+      <div class="ontology" *ngFor="let result of paginationElements | paginate: { itemsPerPage: 1, currentPage: page }">
+          <div>
+              <h2><a>{{result.ontologyId}}</a></h2>
+              <p><em><strong>Title</strong></em>: {{result.title}}</p>
+              <p><em><strong>Description</strong></em>: {{result.description}}</p>
+              <p><em><strong>Definition Properties</strong></em>:{{result.definitionProperties.join(', ')}}</p>
+              <p><em><strong>Synonym Properties</strong></em>:{{result.synonymProperties.join(', ')}}</p>
+          </div>
+      </div>
+  </div>
+      <pagination-controls (pageChange)="page = $event"></pagination-controls>
+  </div>
+
+  <div *ngIf="errorMessage" class="errorMessage">
+      <h2>Error</h2>
+      <p class="error">{{errorMessage}}</p>
+  </div>
+</section>
